@@ -1,0 +1,19 @@
+import pytest
+from myapp.models import Product
+
+@pytest.mark.django_db
+def test_read_product():
+    # Create a sample product
+    product = Product.objects.create(
+        name="Sample Product",
+        description="This is a sample product.",
+        price=19.99,
+        stock=50
+    )
+
+    # Retrieve the product and verify its details
+    retrieved_product = Product.objects.get(id=product.id)
+    assert retrieved_product.name == "Sample Product"
+    assert retrieved_product.description == "This is a sample product."
+    assert retrieved_product.price == 19.99
+    assert retrieved_product.stock == 50
